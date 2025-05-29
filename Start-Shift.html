@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start of Shift Checklist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        h1 {
+            font-size: 1.5em;
+            color: #00bfff;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .timestamp {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 4px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            padding: 6px 0;
+            border-bottom: 1px solid #333;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .button {
+            display: block;
+            width: 90%;
+            margin: 10px auto;
+            padding: 15px;
+            font-size: 1em;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .reset-button {
+            background-color: #d9534f;
+        }
+        .save-button {
+            background-color: #5cb85c;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Start of Shift Checklist</h1>
+    <div class="timestamp" id="timestamp"></div>
+
+    <div class="section">
+        <div class="section-title">Initial Tasks</div>
+        <ul>
+            <li><input type="checkbox" id="task1">Clock In via NinthBrain</li>
+            <li><input type="checkbox" id="task2">Radio Dispatch: Crew/Truck In Service</li>
+            <li><input type="checkbox" id="task19">iPad Charged & Ready</li>
+            <li><input type="checkbox" id="task3">Check Off Narcotics via PSTrax</li>
+            <li><input type="checkbox" id="task4">Check Off Ambulance via PSTrax</li>
+            <li><input type="checkbox" id="task5">Set up imageTrend</li>
+            <li><input type="checkbox" id="task20">Paper Run Forms (Refusal, PCR, PCS)</li>
+            <li><input type="checkbox" id="task21">Badge Buddies</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Equipment Check</div>
+        <ul>
+            <li><input type="checkbox" id="task6">Cardiac Monitor (Electrodes, Test Defib, Pulse Ox, NIBP, Battery)</li>
+            <li><input type="checkbox" id="task7">Oxygen (Portable & Large Supply)</li>
+            <li><input type="checkbox" id="task8">Ventilator</li>
+            <li><input type="checkbox" id="task9">Lucas</li>
+            <li><input type="checkbox" id="task10">Suction</li>
+            <li><input type="checkbox" id="task11">Video Laryngoscope</li>
+            <li><input type="checkbox" id="task12">Medication Box</li>
+            <li><input type="checkbox" id="task13">C-Collar (one at the end of stretcher)</li>
+            <li><input type="checkbox" id="task14">Capno Nasal Cannulas (place one in narc box)</li>
+            <li><input type="checkbox" id="task15">Safety Vest</li>
+            <li><input type="checkbox" id="task16">Pedimate</li>
+            <li><input type="checkbox" id="task17">Broselow Tape</li>
+            <li><input type="checkbox" id="task18">Radio</li>
+        </ul>
+    </div>
+
+    <button class="button reset-button" onclick="resetChecklist()">Reset Checklist</button>
+    <button class="button save-button" onclick="saveAsPDF()">Save as PDF</button>
+
+    <script>
+        const timestamp = new Date().toLocaleString();
+        document.getElementById("timestamp").innerText = "Checklist started: " + timestamp;
+
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            const saved = localStorage.getItem(checkbox.id);
+            if (saved === 'true') checkbox.checked = true;
+
+            checkbox.addEventListener('change', () => {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+        });
+
+        function resetChecklist() {
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+                localStorage.removeItem(checkbox.id);
+            });
+        }
+
+        function saveAsPDF() {
+            const checkedItems = [];
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                if (checkbox.checked) {
+                    checkedItems.push("- " + checkbox.parentElement.innerText.trim());
+                }
+            });
+
+            const blob = new Blob([
+                "Start of Shift Checklist\n",
+                "Timestamp: " + timestamp + "\n\n",
+                checkedItems.join("\n")
+            ], { type: 'application/pdf' });
+
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "Shift_Checklist_" + new Date().toISOString().slice(0,10) + ".pdf";
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+
+</body>
+</html>
