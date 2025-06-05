@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMS Equipment Checklist</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.8em;
+      color: #ffffff;
+    }
+    details {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      padding: 10px;
+    }
+    summary {
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      color: #00bcd4;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 10px;
+    }
+    li {
+      margin: 12px 0;
+    }
+    input[type="checkbox"] {
+      transform: scale(1.4);
+      margin-right: 12px;
+    }
+    @media (hover: none) and (pointer: coarse) {
+      input[type="checkbox"] {
+        transform: scale(1.6);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>EMS Shift Check-Off</h1>
+  <div style="margin-bottom: 20px;">
+    <label for="unitNumber" style="font-size: 1.1em;">Unit Number:</label><br>
+    <input id="unitNumber" type="text" style="width: 80px; font-size: 1em; padding: 10px; background-color: #1e1e1e; color: #f0f0f0; border: 1px solid #444;" oninput="saveUnitNumber()">
+  </div>
+
+  <details open>
+    <summary>Basic Supplies</summary>
+    <ul>
+      <li><input type="checkbox"> 4x4 Pads</li>
+      <li><input type="checkbox"> ABD Pads</li>
+      <li><input type="checkbox"> Trauma Dressing</li>
+      <li><input type="checkbox"> Isolation Kits</li>
+      <li><input type="checkbox"> Roller Gauze</li>
+      <li><input type="checkbox"> Triangular Bandages</li>
+      <li><input type="checkbox"> OB Kit w/Blub Syringe</li>
+      <li><input type="checkbox"> Sterile Saline</li>
+      <li><input type="checkbox"> Betadine</li>
+      <li><input type="checkbox"> Shears</li>
+      <li><input type="checkbox"> Stethoscope</li>
+      <li><input type="checkbox"> Hemostat</li>
+      <li><input type="checkbox"> Scalpel</li>
+      <li><input type="checkbox"> Alcohol Prep Pads</li>
+      <li><input type="checkbox"> Band Aids</li>
+      <li><input type="checkbox"> Antiseptic Hand Cleaner</li>
+      <li><input type="checkbox"> Exam Gloves (various sizes)</li>
+      <li><input type="checkbox"> Emesis Basin/Bag</li>
+      <li><input type="checkbox"> Commercial Tourniquet</li>
+      <li><input type="checkbox"> Linens</li>
+      <li><input type="checkbox"> Tape</li>
+      <li><input type="checkbox"> Occlusive Dressing</li>
+      <li><input type="checkbox"> Thermometer</li>
+      <li><input type="checkbox"> Sharps Container</li>
+      <li><input type="checkbox"> Glucometer w/strips</li>
+      <li><input type="checkbox"> Time Critical Bands (Trauma/Stroke)</li>
+      <li><input type="checkbox"> Triage Tag/Tape</li>
+      <li><input type="checkbox"> Protocols</li>
+      <li><input type="checkbox"> Biohazard Bags</li>
+      <li><input type="checkbox"> N95 Respirator</li>
+      <li><input type="checkbox"> Pediatric Dosage Guide</li>
+      <li><input type="checkbox"> Disinfectant Solution</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Vehicle Check</summary>
+    <ul>
+      <li><input type="checkbox"> Current DMV Registration (check expiration)</li>
+      <li><input type="checkbox"> Current DMV Inspection (check expiration)</li>
+      <li><input type="checkbox"> Current Red Light Permit</li>
+      <li><input type="checkbox"> Current Insurance Coverage (check expiration)</li>
+      <li><input type="checkbox"> Ambulance starts and drives in forward and reverse</li>
+      <li><input type="checkbox"> Tires in good condition</li>
+      <li><input type="checkbox"> No visible physical damage to body or fenders</li>
+      <li><input type="checkbox"> All cab and patient compartment doors function properly</li>
+      <li><input type="checkbox"> Exterior compartment doors secure and functional</li>
+      <li><input type="checkbox"> Interior cabinet doors secure and functional</li>
+      <li><input type="checkbox"> Clean and organized patient compartment and cab</li>
+      <li><input type="checkbox"> Emergency lights operational (front, rear, side panels)</li>
+      <li><input type="checkbox"> Scene lights functional</li>
+      <li><input type="checkbox"> Corner lights functional</li>
+      <li><input type="checkbox"> Grill lights functional</li>
+      <li><input type="checkbox"> Headlight wig-wags functional (if present)</li>
+      <li><input type="checkbox"> Headlights, tail lights, brake lights functional</li>
+      <li><input type="checkbox"> Directional signals operational (left and right)</li>
+      <li><input type="checkbox"> Hazard lights operational</li>
+      <li><input type="checkbox"> Siren and horn functional</li>
+      <li><input type="checkbox"> Mounted and portable radios functional</li>
+      <li><input type="checkbox"> Ventilation system, A/C and heat operational</li>
+      <li><input type="checkbox"> Windshield wipers operational</li>
+      <li><input type="checkbox"> Fuel card, two truck keys, hotspot, phone present</li>
+      <li><input type="checkbox"> All items >5 lbs properly secured</li>
+    </ul>
+  </details>
+
+
+  <script>
+    // Save to localStorage when checkbox is clicked
+    document.querySelectorAll('input[type=checkbox]').forEach(cb => {
+      const saved = localStorage.getItem(cb.nextSibling.textContent.trim());
+      if (saved) {
+        const [checked, time] = JSON.parse(saved);
+        cb.checked = checked;
+        if (checked) cb.nextSibling.textContent += ` (✔ ${time})`;
+      }
+      cb.addEventListener('change', () => {
+        const timestamp = new Date().toLocaleString();
+        localStorage.setItem(cb.nextSibling.textContent.trim(), JSON.stringify([cb.checked, timestamp]));
+        if (cb.checked) {
+          const span = document.createElement('span');
+        span.style.color = '#66ff66';
+        span.style.fontSize = '0.9em';
+        span.style.marginLeft = '8px';
+        span.textContent = `✔ ${timestamp}`;
+        cb.parentNode.appendChild(span);
+        } else {
+          const existing = cb.parentNode.querySelector('span');
+        if (existing) existing.remove();
+        }
+      });
+    });
+
+    // Save notes
+    function saveNotes() {
+      const notes = document.getElementById('notes').value;
+      localStorage.setItem('ems_notes', notes);
+    }
+
+    // Save unit number
+    function saveUnitNumber() {
+      localStorage.setItem('unit_number', document.getElementById('unitNumber').value);
+    }
+
+    // Load saved unit number
+    window.addEventListener('load', () => {
+      const savedNotes = localStorage.getItem('ems_notes');
+      if (savedNotes) {
+        document.getElementById('unitNumber').value = localStorage.getItem('unit_number') || '';
+        document.getElementById('notes').value = savedNotes;
+      }
+    });
+
+    // Reset everything
+    function resetChecklist() {
+      if (confirm("Are you sure you want to clear all checkmarks, timestamps, and notes?")) {
+        localStorage.clear();
+        location.reload();
+      }
+    }
+
+    // Export current state
+    function exportChecklist() {
+      let content = 'EMS Checklist\n\n';
+      document.querySelectorAll('input[type=checkbox]').forEach(cb => {
+        let labelText = cb.parentNode.textContent.replace(/✔.*$/, '').trim();
+        let label = labelText;
+        content += `- ${label}: ${cb.checked ? '✔' : '✘'}\n`;
+      });
+      content += '\nNotes:\n' + document.getElementById('notes').value;
+      const blob = new Blob([content], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'ems_checklist_export.txt';
+      link.click();
+    }
+  </script>
+
+  <div style="margin-top: 30px;">
+    <h2 style="color: #00bcd4;">Notes</h2>
+    <textarea id="notes" rows="6" style="width: 100%; background-color: #1e1e1e; color: #f0f0f0; border: 1px solid #444; padding: 10px;" oninput="saveNotes()"></textarea>
+    <br><br>
+    <button onclick="exportChecklist()" style="padding: 10px; background-color: #00bcd4; color: #121212; border: none; border-radius: 5px; font-size: 1em;">Export Checklist</button>
+    <button onclick="resetChecklist()" style="padding: 10px; background-color: #f44336; color: white; border: none; border-radius: 5px; font-size: 1em; margin-left: 10px;">Reset All</button>
+  </div>
+  </body>
+</html>
+
+</html>
