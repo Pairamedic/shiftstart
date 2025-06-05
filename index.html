@@ -2,183 +2,345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Start of Shift Checklist</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 10px;
-            background-color: #1e1e1e;
-            color: #ffffff;
-        }
-        h1 {
-            font-size: 1.5em;
-            color: #00bfff;
-            text-align: center;
-            margin-bottom: 5px;
-        }
-        .timestamp {
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-            color: #ccc;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .section-title {
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-bottom: 8px;
-            border-bottom: 1px solid #444;
-            padding-bottom: 4px;
-        }
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        li {
-            padding: 6px 0;
-            border-bottom: 1px solid #333;
-        }
-        input[type="checkbox"] {
-            margin-right: 10px;
-            transform: scale(1.2);
-        }
-        .button {
-            display: block;
-            width: 90%;
-            margin: 10px auto;
-            padding: 15px;
-            font-size: 1em;
-            font-weight: bold;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .reset-button {
-            background-color: #d9534f;
-        }
-        .save-button {
-            background-color: #5cb85c;
-        }
-    </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMS Equipment Checklist</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.8em;
+      color: #ffffff;
+    }
+    details {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      padding: 10px;
+    }
+    summary {
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      color: #00bcd4;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 10px;
+    }
+    li {
+      margin: 12px 0;
+    }
+    input[type="checkbox"] {
+      transform: scale(1.4);
+      margin-right: 12px;
+    }
+    @media (hover: none) and (pointer: coarse) {
+      input[type="checkbox"] {
+        transform: scale(1.6);
+      }
+    }
+  </style>
 </head>
 <body>
+  <h1>EMS Shift Check-Off</h1>
+  <div style="margin-bottom: 20px;">
+    <label for="unitNumber" style="font-size: 1.1em;">Unit Number:</label><br>
+    <input id="unitNumber" type="text" style="width: 80px; font-size: 1em; padding: 10px; background-color: #1e1e1e; color: #f0f0f0; border: 1px solid #444;" oninput="saveUnitNumber()">
+  </div>
 
-    <h1>Start of Shift Checklist</h1>
-    <div class="timestamp" id="timestamp"></div>
-
-    <div class="section">
-
-        <div class="section-title">Pre-Work Items</div>
-        <ul>
-            <li><input type="checkbox" id="task1">BlueBag with Eko Sthetoscope (Charged)</li>
+   <details open>
+    <summary>Soft Supplies & Other Equipment</summary>
+    <ul>    <li><input type="checkbox" id="task1">BlueBag with Eko Sthetoscope (Charged)</li>
             <li><input type="checkbox" id="task2">BackPack w/ Chargers, Padfolio (Ipad), Shower Towels, and High-Vis Vest</li>
             <li><input type="checkbox" id="task19">Medications (Modafinil, Glycopyrrolate, Propranlol, Guanfacine)</li>
             <li><input type="checkbox" id="task3">Apple Watch (Charged)-BRING CHARGER FOR 24 HR + </li>
             <li><input type="checkbox" id="task4">High-Vis Rain Jacket for Rain</li>
             <li><input type="checkbox" id="task5">Wallett</li>
             <li><input type="checkbox" id="task4">ADH Short Form Pad</li>
-        </ul>
-    </div>
-    
-        <div class="section-title">Initial Tasks</div>
-        <ul>
-            <li><input type="checkbox" id="task1">Clock In via NinthBrain</li>
-            <li><input type="checkbox" id="task2">Radio Dispatch: Crew/Truck In Service</li>
-            <li><input type="checkbox" id="task19">iPad Charged & Ready</li>
-            <li><input type="checkbox" id="task3">Check Off Narcotics via PSTrax</li>
-            <li><input type="checkbox" id="task4">Check Off Equipment via PSTrax</li>
-            <li><input type="checkbox" id="task5">Set up imageTrend</li>
-            <li><input type="checkbox" id="task4">Check Off Ambulance via Fleetio</li>
-            <li><input type="checkbox" id="task20">Paper Run Forms (Refusal, PCR, PCS)</li>
-            <li><input type="checkbox" id="task20">Trauma Bands, Stroke Bands</li>
-            <li><input type="checkbox" id="task20">Discuss Working-Relationship w/ partner (Seatbelts, ETC02 Monitoring, Temperature & BGL-Preferred Vitals)</li>
-            <li><input type="checkbox" id="task21">Badge Buddies</li>
-        </ul>
-    </div>
+    </ul>
+  </details>
 
-    <div class="section">
-        <div class="section-title">Equipment Check</div>
-        <ul>
-            <li><input type="checkbox" id="task6">Cardiac Monitor (Electrodes, Test Defib, Pulse Ox, NIBP, Battery)</li>
-            <li><input type="checkbox" id="task7">Oxygen (Portable & Large Supply)</li>
-            <li><input type="checkbox" id="task8">Ventilator</li>
-            <li><input type="checkbox" id="task9">Lucas</li>
-            <li><input type="checkbox" id="task10">Suction</li>
-            <li><input type="checkbox" id="task11">Video Laryngoscope</li>
-            <li><input type="checkbox" id="task12">Medication Box</li>
-            <li><input type="checkbox" id="task13">C-Collar (one at the end of stretcher)</li>
-            <li><input type="checkbox" id="task14">Capno Nasal Cannulas (place one in narc box)</li>
-            <li><input type="checkbox" id="task15">Safety Vest</li>
-            <li><input type="checkbox" id="task16">Pedimate</li>
-            <li><input type="checkbox" id="task17">Broselow Tape</li>
-            <li><input type="checkbox" id="task18">Radio</li>
-        </ul>
-    </div>
+  <details open>
+    <summary>Soft Supplies & Other Equipment</summary>
+    <ul>
+      <li><input type="checkbox"> 4x4 Pads</li>
+      <li><input type="checkbox"> ABD Pads</li>
+      <li><input type="checkbox"> Trauma Dressing</li>
+      <li><input type="checkbox"> Isolation Kits</li>
+      <li><input type="checkbox"> Roller Gauze</li>
+      <li><input type="checkbox"> Triangular Bandages</li>
+      <li><input type="checkbox"> OB Kit w/Blub Syringe</li>
+      <li><input type="checkbox"> Sterile Saline</li>
+      <li><input type="checkbox"> Betadine</li>
+      <li><input type="checkbox"> Shears</li>
+      <li><input type="checkbox"> Stethoscope</li>
+      <li><input type="checkbox"> Hemostat</li>
+      <li><input type="checkbox"> Scalpel</li>
+       <li><input type="checkbox"> Blood Pressure Cuffs (LA, A, C, I)</li>
+      <li><input type="checkbox"> Alcohol Prep Pads</li>
+      <li><input type="checkbox"> Band Aids</li>
+      <li><input type="checkbox"> Antiseptic Hand Cleaner</li>
+      <li><input type="checkbox"> Exam Gloves (various sizes)</li>
+      <li><input type="checkbox"> Emesis Basin/Bag</li>
+      <li><input type="checkbox"> Commercial Tourniquet</li>
+      <li><input type="checkbox"> Linens</li>
+      <li><input type="checkbox"> Tape</li>
+      <li><input type="checkbox"> Occlusive Dressing</li>
+      <li><input type="checkbox"> Thermometer</li>
+      <li><input type="checkbox"> Sharps Container</li>
+      <li><input type="checkbox"> Glucometer w/strips</li>
+      <li><input type="checkbox"> Time Critical Bands (Trauma/Stroke)</li>
+      <li><input type="checkbox"> Triage Tag/Tape</li>
+      <li><input type="checkbox"> Protocols</li>
+      <li><input type="checkbox"> Biohazard Bags</li>
+      <li><input type="checkbox"> N95 Respirator</li>
+      <li><input type="checkbox"> Pediatric Dosage Guide</li>
+      <li><input type="checkbox"> Disinfectant Solution</li>
+    </ul>
+  </details>
 
-    
-        <div class="section-title">End Of Shift</div>
-        <ul>
-            <li><input type="checkbox" id="task1">Ensure truck has been washed, cleaned, and restocked.</li>
-            <li><input type="checkbox" id="task2">Ensure Narcotic keys have been transferred. </li>
-            <li><input type="checkbox" id="task19">Make sure radio is placed on the charger, tablet on the charger, and monitor on the charger. </li>
-            <li><input type="checkbox" id="task3">Ensure no PHI is left in the ambulance</li>
-            <li><input type="checkbox" id="task4">Verify on ImageTrend all runs have been posted!</li>
-            <li><input type="checkbox" id="task5">Wallett</li>
-            <li><input type="checkbox" id="task4">Ensure all Pre-Shift Items are placed in personal car. (Padfolio, Backpack, High-vis Jacket & Vest, Stethoscope, Blue Bag-Any food.</li>
-        </ul>
-    </div>
+    <details open>
+    <summary>Airway, Oxygen, and Suction</summary>
+    <ul>
+      <li><input type="checkbox"> Main 02</li>
+      <li><input type="checkbox"> Portable 02</li>
+      <li><input type="checkbox"> OPA Set</li>
+      <li><input type="checkbox"> NPA Set</li>
+      <li><input type="checkbox"> Lubricating Jelly</li>
+      <li><input type="checkbox"> Nasal Cannula - Adult</li>
+      <li><input type="checkbox"> Nasal Cannula - Pediatric</li>
+      <li><input type="checkbox"> NRB - Adult</li>
+      <li><input type="checkbox"> NRB - Pediatric</li>
+      <li><input type="checkbox"> NRB - Infant</li>
+      <li><input type="checkbox"> BVM - Adult</li>
+      <li><input type="checkbox"> BVM - Pediatric</li>
+      <li><input type="checkbox"> BVM - Infant</li>
+       <li><input type="checkbox">Nebulizer Kit</li>
+      <li><input type="checkbox"> Suction - On-Board</li>
+      <li><input type="checkbox"> Suction - Portable</li>
+      <li><input type="checkbox"> Suction Tubing</li>
+      <li><input type="checkbox"> Rigid Suction Tip</li>
+      <li><input type="checkbox"> Suction Catheters (8fr/10fr, 12FR, 14F, 14/18fr)</li>
+      <li><input type="checkbox"> Magill Forceps - Adult</li>
+      <li><input type="checkbox"> Magill Forceps - Pediatric</li>
+      <li><input type="checkbox"> ETC02 Detector</li>
+      <li><input type="checkbox"> Cric Kit or 10/12ga Needle</li>
+      <li><input type="checkbox"> Laryngscope Handle - Adult</li>
+      <li><input type="checkbox"> Laryngscope Handle - Pediatric</li>
+      <li><input type="checkbox"> Laryngscope Blades (1-4 or 0-3)</li>
+      <li><input type="checkbox"> ET Tubes 2.5mmg-7.5 mm</li>
+      <li><input type="checkbox"> ET Tube Holder - Adult</li>
+      <li><input type="checkbox"> ET Tube Holder - Pediatric</li>
+      <li><input type="checkbox"> Stylette - Adult</li>
+      <li><input type="checkbox"> Stylette - Pediatric</li>
+      <li><input type="checkbox"> Secondary Advanced Airway - Adult</li>
+      <li><input type="checkbox"> Secondayr Advanced Airway - Pediatric</li>
+    </ul>
+  </details>
 
-    <button class="button reset-button" onclick="resetChecklist()">Reset Checklist</button>
-    <button class="button save-button" onclick="saveAsPDF()">Save as PDF</button>
+   <details open>
+    <summary>Monitor</summary>
+    <ul>
+      <li><input type="checkbox"> Cardiac Monitor</li>
+      <li><input type="checkbox"> Cardiac Monitor Cables/Charger</li>
+      <li><input type="checkbox">4-Lead</li>
+      <li><input type="checkbox">12-Lead</li>
+      <li><input type="checkbox">Defibrillator (Defib Test)</li>
+      <li><input type="checkbox"> Pacer </li>
+      <li><input type="checkbox"> ECG Paper</li>
+      <li><input type="checkbox"> Defibrilaltor Pads/Paddles - Adut</li>
+      <li><input type="checkbox"> Defibrillator Pads/Paddles - Pediatric</li>
+      <li><input type="checkbox"> Electrodes - Adult</li>
+      <li><input type="checkbox"> Electrodes - Pediatric</li>
+      <li><input type="checkbox"> Pulse Oximetry - Adult</li>
+      <li><input type="checkbox"> Pulse Oximetry - Pediatric</li>
 
-    <script>
+    </ul>
+  </details>
+
+  <details open>
+    <summary>IV Supplies</summary>
+    <ul>
+      <li><input type="checkbox"> Micro (60) Drip Set</li>
+      <li><input type="checkbox"> Micro (10) Drip Set</li>
+      <li><input type="checkbox"> Adjustable Drip Set</li>
+      <li><input type="checkbox"> IV Start sets/tourniquet</li>
+      <li><input type="checkbox"> IV Catheters 14-24 gauge</li>
+      <li><input type="checkbox"> Syrignes 1cc-60cc</li>
+      <li><input type="checkbox"> Needles 18-25</li>
+      <li><input type="checkbox"> 10-12, or 14 G Cath or a commerical Chest Decomp Needle</li>
+      <li><input type="checkbox"> IO Access Device</li>
+      <li><input type="checkbox"> IO Needle - Adult</li>
+      <li><input type="checkbox"> IO Needle - Pediatric</li>
+    </ul>
+  </details>
+
+    <details open>
+    <summary>Medications</summary>
+    <ul>
+      <li><input type="checkbox"> Atropine</li>
+      <li><input type="checkbox"> Adenosine</li>
+      <li><input type="checkbox"> Antiarrhythmic (Bolus & Infusion)</li>
+      <li><input type="checkbox"> Antiemetic</li>
+      <li><input type="checkbox"> Aspirin</li>
+      <li><input type="checkbox"> IV Dextrose</li>
+      <li><input type="checkbox"> Pressor</li>
+      <li><input type="checkbox"> Epi 1:1</li>
+      <li><input type="checkbox"> Epi 1:10</li>
+      <li><input type="checkbox"> Crystalloid Solution</li>
+      <li><input type="checkbox"> H1 Antagonist</li>
+      <li><input type="checkbox"> Inhaled Beta Agonist</li>
+      <li><input type="checkbox"> Magnesium Sulfate</li>
+      <li><input type="checkbox"> Narcotic Antagonist</li>
+      <li><input type="checkbox"> Nitroglycerin</li>
+      <li><input type="checkbox"> Sodium Bicarbonate</li>
+      <li><input type="checkbox"> Narcotic Analgesic</li>
+      <li><input type="checkbox"> Benzodiazepine</li>
+    </ul>
+  </details>
+
+
+    <details open>
+    <summary>Mechanical & Transport</summary>
+    <ul>
+      <li><input type="checkbox"> Fire Extinguisher</li>
+      <li><input type="checkbox"> Haz-Mat Reference Guide</li>
+      <li><input type="checkbox"> Reflective Safety Wear</li>
+      <li><input type="checkbox"> Flashlight</li>
+      <li><input type="checkbox"> KED</li>
+      <li><input type="checkbox"> Pediatric Restraint System</li>
+      <li><input type="checkbox"> Spine Board w/ straps</li>
+      <li><input type="checkbox"> Window Punch</li>
+      <li><input type="checkbox"> Traction Splint</li>
+      <li><input type="checkbox"> Various Adjustable Splints</li>
+      <li><input type="checkbox"> Elevating Stretcher</li>
+      <li><input type="checkbox"> Folding Stretcher, Scoop Stretcher</li>
+      <li><input type="checkbox"> Cervical Collars - Adult</li>
+      <li><input type="checkbox"> Cervical Collars - Pediatric</li>
+      <li><input type="checkbox"> Functioning Radios</li>
+    </ul>
+  </details>
+  
+  <details>
+    <summary>Vehicle Check</summary>
+    <ul>
+      <li><input type="checkbox"> Current DMV Registration (check expiration)</li>
+      <li><input type="checkbox"> Current DMV Inspection (check expiration)</li>
+      <li><input type="checkbox"> Current Red Light Permit</li>
+      <li><input type="checkbox"> Current Insurance Coverage (check expiration)</li>
+      <li><input type="checkbox"> Ambulance starts and drives in forward and reverse</li>
+      <li><input type="checkbox"> Tires in good condition</li>
+      <li><input type="checkbox"> No visible physical damage to body or fenders</li>
+      <li><input type="checkbox"> All cab and patient compartment doors function properly</li>
+      <li><input type="checkbox"> Exterior compartment doors secure and functional</li>
+      <li><input type="checkbox"> Interior cabinet doors secure and functional</li>
+      <li><input type="checkbox"> Clean and organized patient compartment and cab</li>
+      <li><input type="checkbox"> Emergency lights operational (front, rear, side panels)</li>
+      <li><input type="checkbox"> Scene lights functional</li>
+      <li><input type="checkbox"> Corner lights functional</li>
+      <li><input type="checkbox"> Grill lights functional</li>
+      <li><input type="checkbox"> Headlight wig-wags functional (if present)</li>
+      <li><input type="checkbox"> Headlights, tail lights, brake lights functional</li>
+      <li><input type="checkbox"> Directional signals operational (left and right)</li>
+      <li><input type="checkbox"> Hazard lights operational</li>
+      <li><input type="checkbox"> Siren and horn functional</li>
+      <li><input type="checkbox"> Mounted and portable radios functional</li>
+      <li><input type="checkbox"> Ventilation system, A/C and heat operational</li>
+      <li><input type="checkbox"> Windshield wipers operational</li>
+      <li><input type="checkbox"> Fuel card, two truck keys, hotspot, phone present</li>
+      <li><input type="checkbox"> All items >5 lbs properly secured</li>
+    </ul>
+  </details>
+
+
+  <script>
+    // Save to localStorage when checkbox is clicked
+    document.querySelectorAll('input[type=checkbox]').forEach(cb => {
+      const saved = localStorage.getItem(cb.nextSibling.textContent.trim());
+      if (saved) {
+        const [checked, time] = JSON.parse(saved);
+        cb.checked = checked;
+        if (checked) cb.nextSibling.textContent += ` (✔ ${time})`;
+      }
+      cb.addEventListener('change', () => {
         const timestamp = new Date().toLocaleString();
-        document.getElementById("timestamp").innerText = "Checklist started: " + timestamp;
-
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            const saved = localStorage.getItem(checkbox.id);
-            if (saved === 'true') checkbox.checked = true;
-
-            checkbox.addEventListener('change', () => {
-                localStorage.setItem(checkbox.id, checkbox.checked);
-            });
-        });
-
-        function resetChecklist() {
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = false;
-                localStorage.removeItem(checkbox.id);
-            });
+        localStorage.setItem(cb.nextSibling.textContent.trim(), JSON.stringify([cb.checked, timestamp]));
+        if (cb.checked) {
+          const span = document.createElement('span');
+        span.style.color = '#66ff66';
+        span.style.fontSize = '0.9em';
+        span.style.marginLeft = '8px';
+        span.textContent = `✔ ${timestamp}`;
+        cb.parentNode.appendChild(span);
+        } else {
+          const existing = cb.parentNode.querySelector('span');
+        if (existing) existing.remove();
         }
+      });
+    });
 
-        function saveAsPDF() {
-            const checkedItems = [];
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                if (checkbox.checked) {
-                    checkedItems.push("- " + checkbox.parentElement.innerText.trim());
-                }
-            });
+    // Save notes
+    function saveNotes() {
+      const notes = document.getElementById('notes').value;
+      localStorage.setItem('ems_notes', notes);
+    }
 
-            const blob = new Blob([
-                "Start of Shift Checklist\n",
-                "Timestamp: " + timestamp + "\n\n",
-                checkedItems.join("\n")
-            ], { type: 'application/pdf' });
+    // Save unit number
+    function saveUnitNumber() {
+      localStorage.setItem('unit_number', document.getElementById('unitNumber').value);
+    }
 
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = "Shift_Checklist_" + new Date().toISOString().slice(0,10) + ".pdf";
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-    </script>
+    // Load saved unit number
+    window.addEventListener('load', () => {
+      const savedNotes = localStorage.getItem('ems_notes');
+      if (savedNotes) {
+        document.getElementById('unitNumber').value = localStorage.getItem('unit_number') || '';
+        document.getElementById('notes').value = savedNotes;
+      }
+    });
 
-</body>
+    // Reset everything
+    function resetChecklist() {
+      if (confirm("Are you sure you want to clear all checkmarks, timestamps, and notes?")) {
+        localStorage.clear();
+        location.reload();
+      }
+    }
+
+    // Export current state
+    function exportChecklist() {
+      let content = 'EMS Checklist\n\n';
+      document.querySelectorAll('input[type=checkbox]').forEach(cb => {
+        let labelText = cb.parentNode.textContent.replace(/✔.*$/, '').trim();
+        let label = labelText;
+        content += `- ${label}: ${cb.checked ? '✔' : '✘'}\n`;
+      });
+      content += '\nNotes:\n' + document.getElementById('notes').value;
+      const blob = new Blob([content], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'ems_checklist_export.txt';
+      link.click();
+    }
+  </script>
+
+  <div style="margin-top: 30px;">
+    <h2 style="color: #00bcd4;">Notes</h2>
+    <textarea id="notes" rows="6" style="width: 100%; background-color: #1e1e1e; color: #f0f0f0; border: 1px solid #444; padding: 10px;" oninput="saveNotes()"></textarea>
+    <br><br>
+    <button onclick="exportChecklist()" style="padding: 10px; background-color: #00bcd4; color: #121212; border: none; border-radius: 5px; font-size: 1em;">Export Checklist</button>
+    <button onclick="resetChecklist()" style="padding: 10px; background-color: #f44336; color: white; border: none; border-radius: 5px; font-size: 1em; margin-left: 10px;">Reset All</button>
+  </div>
+  </body>
+</html>
+
 </html>
